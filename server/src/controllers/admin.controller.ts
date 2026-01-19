@@ -16,18 +16,16 @@ export const adminLogin = async (req: Request, res: Response) => {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
-  const token = jwt.sign(
-    { id: admin._id },
-    process.env.JWT_SECRET as string,
-    { expiresIn: "1h" }
-  );
+  const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET as string, {
+    expiresIn: "1h",
+  });
 
   // ✅ SET HTTPONLY COOKIE
-  res.cookie("admin_token", token, {
+  res.cookie("adminToken", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    maxAge: 60 * 60 * 1000, // 1 hour
+    secure: true, // REQUIRED on HTTPS (Vercel/Render)
+    sameSite: "none", // REQUIRED for cross-site cookies
+    maxAge: 24 * 60 * 60 * 1000,
   });
 
   res.json({
@@ -48,10 +46,9 @@ export const adminMe = async (req: Request, res: Response) => {
 };
 export const adminLogout = (_req: Request, res: Response) => {
   res.clearCookie("admin_token", {
-  httpOnly: true,
-  sameSite: "strict",
-  secure: process.env.NODE_ENV === "production",
-});
+    httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+  });
   res.json({ message: "Logged out" });
 };
-
