@@ -1,0 +1,7 @@
+/* src/index.css */
+@import "tailwindcss";
+
+@theme {
+  /* This overrides the default 'font-sans' stack used by Tailwind */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji";
+}
