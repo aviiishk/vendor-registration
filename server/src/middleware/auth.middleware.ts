@@ -6,7 +6,7 @@ export const adminAuth = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies?.admin_token;
+  const token = req.cookies?.adminToken;
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });

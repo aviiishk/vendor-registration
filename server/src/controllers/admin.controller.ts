@@ -45,7 +45,7 @@ export const adminMe = async (req: Request, res: Response) => {
   res.json(admin);
 };
 export const adminLogout = (_req: Request, res: Response) => {
-  res.clearCookie("admin_token", {
+  res.clearCookie("adminToken", {
     httpOnly: true,
     sameSite: "strict",
     secure: process.env.NODE_ENV === "production",
