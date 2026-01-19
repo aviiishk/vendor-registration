@@ -10,8 +10,12 @@ import adminVendorRoutes from "./routes/admin.vendor.routes";
 
 const app = express();
 
+// ✅ REQUIRED for Render (rate-limit + proxy)
+app.set("trust proxy", 1);
+
 // 🔒 Security
 app.use(helmet());
+
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -23,8 +27,8 @@ app.use(
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // local dev (Vite)
-      "https://agihf.vercel.app/", // production frontend
+      "http://localhost:5173",
+      "https://agihf.vercel.app",
     ],
     credentials: true,
   })
