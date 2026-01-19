@@ -22,7 +22,10 @@ app.use(
 // ✅ CORS (must be before routes)
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173", // local dev (Vite)
+      "https://agihf.vercel.app/", // production frontend
+    ],
     credentials: true,
   })
 );
