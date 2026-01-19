@@ -6,7 +6,7 @@ const API_BASE_URL =
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true, // ✅ required for httpOnly cookies
-});
+}); 
 
 // 🔥 IMPORTANT: set headers conditionally
 axiosInstance.interceptors.request.use((config) => {
